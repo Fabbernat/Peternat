@@ -1,0 +1,25 @@
+﻿@model PetRegistryApp.Models.Category
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Category Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Short Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <input type="submit" value="Add Category" class="btn btn-primary" />
+    </div>
+</form>

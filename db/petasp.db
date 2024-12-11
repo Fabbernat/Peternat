@@ -1,0 +1,29 @@
+-- Create Categories table
+CREATE TABLE Categories (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Description TEXT
+);
+
+-- Create Pets table
+CREATE TABLE Pets (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Gender TEXT NOT NULL,
+    Age INTEGER CHECK (Age >= 0),
+    Weight REAL CHECK (Weight >= 0),
+    PhotoUrl TEXT NOT NULL,
+    CategoryId INTEGER,
+    FOREIGN KEY (CategoryId) REFERENCES Categories(Id)
+);
+
+-- Insert sample data into Categories table
+INSERT INTO Categories (Name, Description) VALUES 
+('Dog', 'Domesticated canines'),
+('Cat', 'Domesticated felines');
+
+-- Insert sample data into Pets table
+INSERT INTO Pets (Name, Gender, Age, Weight, PhotoUrl, CategoryId) VALUES 
+('Buddy', 'Male', 3, 20.5, 'https://example.com/images/buddy.jpg', 1),
+('Whiskers', 'Female', 2, 4.2, 'https://example.com/images/whiskers.jpg', 2),
+('Max', 'Male', 4, 25.3, 'https://example.com/images/max.jpg', 1);
