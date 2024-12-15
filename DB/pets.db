@@ -1,0 +1,52 @@
+-- Check if the pets.db database exists, and create it if it doesn't
+CREATE DATABASE pets;
+
+-- Check if the Categories table exists, and create it if it doesn't
+CREATE TABLE IF NOT EXISTS Categories (
+    CategoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    CategoryName TEXT NOT NULL,
+    CategoryDescription TEXT
+);
+
+-- Check if the Pets table exists, and create it if it doesn't
+CREATE TABLE IF NOT EXISTS Pets (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Gender TEXT NOT NULL,
+    Age INTEGER NOT NULL,
+    Weight REAL NOT NULL,
+    PhotoUrl TEXT,
+    CategoryId INTEGER NOT NULL,
+    FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId)
+);
+
+
+-- Insert data into the Categories table
+INSERT OR IGNORE INTO Categories (CategoryName, CategoryDescription) VALUES
+('Dog', 'Man''s best friend'),
+('Cat', 'Independent and curious'),
+('Bird', 'Feathered friends'),
+('Fish', 'Aquatic companions'),
+('Reptile', 'Scaly and fascinating'),
+('Small Mammal', 'Pocket-sized pets'),
+('Horse', 'Majestic and powerful');
+
+-- Insert data into the Pets table
+INSERT OR IGNORE INTO Pets (Name, Gender, Age, Weight, PhotoUrl, CategoryId) VALUES
+('Buddy', 'Male', 3, 25.5, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Dog')),
+('Whiskers', 'Female', 5, 4.2, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Cat')),
+('Charlie', 'Male', 1, 0.1, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Bird')),
+('Finny', 'Male', 2, 0.05, NULL, (SELECT CategoryId FROM Categories WHERE CategoryName = 'Fish')),
+('Lizzy', 'Female', 4, 1.2, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Reptile')),
+('Hammy', 'Male', 1, 0.15, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Small Mammal')),
+('Bella', 'Female', 8, 500, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Horse'));
+
+-- More sample data for Pets table
+INSERT OR IGNORE INTO Pets (Name, Gender, Age, Weight, PhotoUrl, CategoryId) VALUES
+('Max', 'Male', 2, 30.7, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Dog')),
+('Lucy', 'Female', 7, 3.8, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Cat')),
+('Tweety', 'Female', 1, 0.08, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Bird')),
+('Goldie', 'Female', 3, 0.12, NULL, (SELECT CategoryId FROM Categories WHERE CategoryName = 'Fish')),
+('Spike', 'Male', 5, 1.5, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Reptile')),
+('Nibbles', 'Female', 2, 0.2, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Small Mammal')),
+('Rocky', 'Male', 10, 600, '~images/suni.jpg', (SELECT CategoryId FROM Categories WHERE CategoryName = 'Horse'));

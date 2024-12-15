@@ -1,0 +1,89 @@
+﻿@using Microsoft.Data.Sqlite
+@try
+{
+    
+
+@model PetRegistryApp.Models.Owner
+
+{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Owner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LivingEnvironment" class="control-label"></label>
+                <select asp-for="LivingEnvironment" class="form-control" id="living-enviro">
+                    <option selected disabled>Please select one</option>
+                   @* TODO  @{var item = Owner.LivingEnvironment.items();}
+                    @foreach (var elem in item)
+                        <option>
+                            @Html.DisplayFor(modelItem => item.LivingEnvironment)
+                        </option> *@
+
+                    <option>
+                        Downtown
+                        
+                    </option>
+                    <option>
+                    Suburbs
+
+                    </option>
+                    <option>
+
+                    Farm
+                    </option>
+                </select>
+                <span asp-validation-for="LivingEnvironment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsExperiencedPetOwner" /> @Html.DisplayNameFor(model => model.IsExperiencedPetOwner)
+                </label>
+            </div>
+            <div class="form-group">
+                @try{
+                    
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                } catch (Exception e)
+                {
+ <p>
+
+                    Hibás telefonszám!
+ </p>                   
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+}
+catch (SqliteException e)
+{
+    
+}

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<PetRegistryApp.Models.Owner>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>@Html.DisplayNameFor(model => model.Name)</th>
+			<th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+			<th>@Html.DisplayNameFor((Owner model) => model.LivingEnvironment)</th>
+			<th>@Html.DisplayNameFor(model => model.IsExperiencedPetOwner)</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model == null || !Model.Any())
+		{
+			<p class="no-categories">No categories found. Our database might be having a little trouble right now. Please try again later!</p>
+			<p>In the meantime, you could try these options:</p>
+			<ul>
+				<li><a href="#">Contact support</a></li>
+				<li><a href="#">Check our status page</a></li>
+			</ul>
+			
+		}
+		else
+		{
+
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.PhoneNumber)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.LivingEnvironment)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IsExperiencedPetOwner)
+					</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+						<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+						<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+					</td>
+				</tr>
+			}
+
+
+			<div style="padding=20px;margin=20px">
+				<h3>Sorting</h3>
+			</div>
+			<form action="#" method="post" style="padding=20px;margin=20px">
+				<label for="rendezes">
+					Reverse order
+					<br />
+					<input type="checkbox" value="csokkeno">
+				</label>
+
+				<br />
+				<div style="padding=20px;margin=10px">
+
+					<label for="select">
+						<select>
+							<option value="default" selected disabled>Group by</option>
+							<option value="o1">Experience</option>
+							<option value="o2">Living environment</option>
+							<option value="o3">Number of pets owned</option>
+						</select>
+					</label>
+				</div>
+
+				<br />
+
+				<label for="submit">
+
+					<input type="submit" />
+				</label>
+			</form>
+			<ul>
+				<li><a href="#">Jani</a></li>
+				<li><a href="#">Bela</a></li>
+				<li><a href="#">Gipsz Jakab</a></li>
+			</ul>
+		}
+	</tbody>
+</table>
+<a href="../">Go back</a>

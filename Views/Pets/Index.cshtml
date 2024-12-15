@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PetRegistryApp.Models.Pet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="kepek">
+    <img src="../wwwroot/images/17yyiocwgrjy.jpg" alt="Cute white pet" width="500" height="600">
+    <img src="../wwwroot/images/cat.jpg" alt="Cat" width="500" height="600">
+    <img src="../wwwroot/images/istockphoto-636475496-612x612.jpg" alt="Stock photo" width="500" height="600">
+    <img src="../wwwroot/images/preview16.jpg" alt="Preview" width="500" height="600">
+    <img src="../wwwroot/images/suni.jpg" alt="Sundiszno" width="500" height="600">
+    <img src="../wwwroot/images/turtle.jpg" alt="Turtle" width="500" height="600">
+
+</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferencedCategory)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <p>No categories found. Our database might be having a little trouble right now. Please try again later!</p>
+            <p>In the meantime, check out these popular pet categories:</p>
+            <ul>
+                <li><a href="#">Dogs</a></li>
+                <li><a href="#">Cats</a></li>
+                <li><a href="#">Birds</a></li>
+            </ul>
+        }
+        else if (!Model.Equals(null))
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotoUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferencedCategory.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<a href="../">Go back</a>
